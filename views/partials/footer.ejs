@@ -1,0 +1,82 @@
+<style>
+  .footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .footer-item {
+    margin: 0 20px;
+    font-size: 18px;
+  }
+
+  .footer-item a {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .footer-item a:hover {
+    color: #3498db;
+    transform: scale(1.2);
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 25px;
+  }
+
+  .social-icon {
+    font-size: 24px;
+  }
+
+  .copyright {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-left: 40px;
+  }
+
+  /* Add Font Awesome for better icons */
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+</style>
+
+<div class="footer">
+  <div class="footer-container">
+    <div class="social-icons">
+      <div class="footer-item">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-facebook social-icon" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="footer-item">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram social-icon" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="footer-item">
+        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-twitter social-icon" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+    <div class="footer-item copyright">
+      <p>&copy; 2022 EJS Test</p>
+    </div>
+  </div>
+</div>

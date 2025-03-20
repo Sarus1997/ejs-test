@@ -9,13 +9,25 @@
   </title>
 </head>
 
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+</style>
+
 <body>
-  <%- include('partials/navbar') %> <!-- Navbar Component -->
+  <!-- Navbar Component -->
+  <%- include('partials/navbar') %>
 
     <main>
       <!-- เนื้อหาจะแสดงตามไฟล์ที่ถูกส่งจาก route -->
       <%- include(body) %> <!-- ใช้ชื่อไฟล์ที่ส่งจาก route เช่น 'about' -->
-    </main>
+    </main>.
+
+    <!-- Footer Component -->
+    <%- include('partials/footer') %>
 </body>
 
 </html>

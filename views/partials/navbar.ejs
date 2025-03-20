@@ -1,7 +1,205 @@
+<style>
+  nav {
+    background-color: #2c3e50;
+    padding: 15px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid #3498db;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    color: #ecf0f1;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+  }
+
+  .logo span {
+    color: #3498db;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  li {
+    margin-left: 30px;
+    position: relative;
+  }
+
+  li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 5px 0;
+  }
+
+  li a:hover {
+    color: #3498db;
+    transform: translateY(-3px);
+  }
+
+  li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #3498db;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+
+  li a:hover::after {
+    width: 100%;
+  }
+
+  .active a {
+    color: #3498db;
+  }
+
+  .active a::after {
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: none;
+    color: #ecf0f1;
+    font-size: 28px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1001;
+  }
+
+  .menu-toggle:hover {
+    color: #3498db;
+    transform: rotate(90deg);
+  }
+
+  @media screen and (max-width: 768px) {
+    .nav-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .logo-menu-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ul {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      opacity: 0;
+      margin-top: 15px;
+    }
+
+    ul.show {
+      display: flex;
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    li {
+      margin: 12px 0;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    ul.show li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    li a::after {
+      bottom: -3px;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+  }
+</style>
+
 <nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/contact">Contact</a></li>
-  </ul>
+  <div class="nav-container">
+    <div class="logo-menu-container">
+      <div class="logo">EJS<span>Test</span></div>
+      <span class="menu-toggle">&#9776;</span>
+    </div>
+    <ul>
+      <li class="<%= title === 'Home' ? 'active' : '' %>"><a href="/">Home</a></li>
+      <li class="<%= title === 'About' ? 'active' : '' %>"><a href="/about">About</a></li>
+      <li class="<%= title === 'Contact' ? 'active' : '' %>"><a href="/contact">Contact</a></li>
+    </ul>
+  </div>
 </nav>
+
+<script>
+  document.querySelector('.menu-toggle').addEventListener('click', function () {
+    var menu = document.querySelector('nav ul');
+    menu.classList.toggle('show');
+
+    // Add staggered delay to each list item animation
+    var listItems = menu.querySelectorAll('li');
+    listItems.forEach((item, index) => {
+      item.style.transitionDelay = (index * 0.1) + 's';
+    });
+
+    // Reset delays when menu is closed
+    if (!menu.classList.contains('show')) {
+      setTimeout(() => {
+        listItems.forEach(item => {
+          item.style.transitionDelay = '0s';
+        });
+      }, 500);
+    }
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function (event) {
+    const nav = document.querySelector('nav');
+    const menu = document.querySelector('nav ul');
+    const menuToggle = document.querySelector('.menu-toggle');
+
+    if (menu.classList.contains('show') &&
+      !nav.contains(event.target) ||
+      (event.target.tagName === 'A' && nav.contains(event.target))) {
+      menu.classList.remove('show');
+
+      // Reset delays
+      const listItems = menu.querySelectorAll('li');
+      setTimeout(() => {
+        listItems.forEach(item => {
+          item.style.transitionDelay = '0s';
+        });
+      }, 500);
+    }
+  });
+</script>
